@@ -1,9 +1,9 @@
 Create a .env file in the MAIN folder.
-Online-University-Student.... \
-    -> connection \ 
-        -> core... \
-    -> .env (IN THE MAIN FOLDER) \
-    -> .gitignore \
+Online-University-Student....  
+    -> connection  
+        -> core...  
+    -> .env (IN THE MAIN FOLDER)  
+    -> .gitignore  
 
 Put:
 

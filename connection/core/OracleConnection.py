@@ -2,43 +2,43 @@ import os
 from dotenv import load_dotenv
 import oracledb
 
-load_dotenv()
 
-username = os.getenv("USERNAME")
-password = os.getenv("PASSWORD")
-dsn = os.getenv("DSN")
 
-try:
-    # Connect to Oracle Database
-    connection = oracledb.connect(
-        user=username,
-        password=password,
-        dsn=dsn
-    )
+class Connection:
+    def __init__(self):
+        load_dotenv()
 
-    print("Successfully connected to Oracle Database!")
+        self._username = os.getenv("USER")
+        self._password = os.getenv("PASSWORD")
+        self._dsn = os.getenv("DSN")
 
-    # Create a cursor (similar to JDBC Statement/ResultSet)
-    cursor = connection.cursor()
+    def create_session(self):
+        try:
+            # Connect to Oracle Database
+            connection = oracledb.connect(
+                user=self._username,
+                password=self._password,
+                dsn=self._dsn
+            )
 
-    # Execute embedded SQL SELECT statement
-    cursor.execute("SELECT NAME, NUM FROM TESTJDBC")
+            print("Successfully connected to Oracle Database!")
 
-    # Retrieve and display records
-    print("\nNAME\tNUM")
-    print("-------------------------")
+            # Create a cursor (similar to JDBC Statement/ResultSet)
+            self.cursor = connection.cursor()
+            self.connection = connection
 
-    for row in cursor:
-        print(row[0], "\t", row[1])
+            return self.cursor
 
-    # Close cursor and connection
-    cursor.close()
-    connection.close()
+        except oracledb.Error as error:
+                    print("Oracle Database Error:", error)
 
-    print("\nDatabase connection closed.")
+    def close_session(self):
 
-except oracledb.Error as error:
-    print("Oracle Database Error:", error)
+         # Close cursor and connection
+        self.cursor.close()
+        self.connection.close()
+
+        print("\nDatabase connection closed.")
 
 
 # NOTES:
