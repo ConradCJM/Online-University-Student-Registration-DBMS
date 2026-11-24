@@ -27,7 +27,7 @@ class Connection:
             self.cursor = connection.cursor()
             self.connection = connection
 
-            return self.cursor
+            return self.cursor, self.connection
 
         except oracledb.Error as error:
                     print("Oracle Database Error:", error)
