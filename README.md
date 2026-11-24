@@ -9,6 +9,7 @@ python -m venv venv
 
 pip install oracledb
 pip install python-dotenv
+pip install fastapi
 
 # OR
 
@@ -22,6 +23,9 @@ ORACLE_USER=your_oracle_username
 ORACLE_PASSWORD=your_oracle_password
 ORACLE_DSN=your_oracle_dsn
 ```
+
+## Run the cmd line app
+py cmd_line.py
 
 ## Run the application
 
