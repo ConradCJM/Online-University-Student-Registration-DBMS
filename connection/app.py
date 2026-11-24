@@ -40,7 +40,7 @@ def create_course(crs: CourseCreate):
     try:
         cursor.execute(
             "INSERT INTO COURSE VALUES (:1, :2, :3, :4)",
-            [crs.name, crs.id, crs.creditHours, crs.department_id]
+            [crs.id, crs.name, crs.creditHours, crs.department_id]
         )
         conn.commit()
         return {"message": "Course added"}
