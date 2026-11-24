@@ -30,7 +30,7 @@ def create_employee(crs: course_schema):
             [crs.name, crs.id, crs.creditHours, crs.department_id]
         )
         conn.commit()
-        return {"message": "Employee added"}
+        return {"message": "Course added"}
     except oracledb.IntegrityError:
         # Catches ORA-02291 if the frontend sends a department_id that doesn't exist
         raise HTTPException(status_code=400, detail="Invalid department_id: Department does not exist.")
