@@ -8,9 +8,19 @@ class Connection:
     def __init__(self):
         load_dotenv()
 
-        self._username = os.getenv("USER")
-        self._password = os.getenv("PASSWORD")
-        self._dsn = os.getenv("DSN")
+        self._username = os.getenv("ORACLE_USER")
+        self._password = os.getenv("ORACLE_PASSWORD")
+        self._dsn = os.getenv("ORACLE_DSN")
+
+        missing = [
+            name for name, value in (
+                ("ORACLE_USER", self._username),
+                ("ORACLE_PASSWORD", self._password),
+                ("ORACLE_DSN", self._dsn),
+            ) if not value
+        ]
+        if missing:
+            raise RuntimeError(f"Missing {', '.join(missing)} in the project-root .env file.")
 
     def create_session(self):
         try:
@@ -30,7 +40,7 @@ class Connection:
             return self.cursor, self.connection
 
         except oracledb.Error as error:
-                    print("Oracle Database Error:", error)
+            raise RuntimeError("Could not connect to Oracle Database. Check your .env settings and network/VPN access.") from error
 
     def close_session(self):
 
