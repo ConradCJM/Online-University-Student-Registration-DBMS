@@ -5,6 +5,8 @@ from commandlinetest.create_tables import create_tables
 from commandlinetest.drop_tables import drop_tables
 from commandlinetest.populate_tables import populate_tables
 from commandlinetest.queries import run_queries
+from commandlinetest.delete_rows import delete_rows
+from commandlinetest.update_rows import update_rows
 
 MENU = """
 =================================================================
@@ -17,6 +19,8 @@ MENU = """
   2) Create Tables
   3) Populate Tables
   4) Query Tables
+  5) Delete Row
+  6) Update Row
 
   E) End/Exit
 """
@@ -28,6 +32,8 @@ Manual
 2) Create Tables    - creates the schema
 3) Populate Tables  - inserts the sample data
 4) Query Tables     - runs the queries and creates the views
+5) Delete Row       - deletes one row from a selected table by its primary key
+6) Update Row       - updates one column in a selected row
 E) Exit             - closes the database session
 """
 
@@ -59,6 +65,12 @@ try:
             pause()
         elif choice == "4":
             run_queries(cursor, conn)
+            pause()
+        elif choice == "5":
+            delete_rows(cursor, conn)
+            pause()
+        elif choice == "6":
+            update_rows(cursor, conn)
             pause()
         elif choice == "E":
             break
