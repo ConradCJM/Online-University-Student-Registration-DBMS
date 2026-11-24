@@ -5,6 +5,13 @@ Powershell setup
 ```powershell
 python -m venv venv
 .\venv\Scripts\Activate.ps1
+
+
 pip install oracledb
 pip install python-dotenv
+
+# OR
+
+pip install -r requirements.txt
 ```
+
