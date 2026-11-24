@@ -23,7 +23,7 @@ def get_courses():
     return [{"id": row[0], "name": row[1]} for row in cursor.fetchall()]
 
 @app.post("/courses")
-def create_employee(crs: course_schema):
+def create_course(crs: course_schema):
     try:
         cursor.execute(
             "INSERT INTO COURSE VALUES (:1, :2, :3, :4)",
